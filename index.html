@@ -65,8 +65,10 @@
     </div>
 
     <script src="script.js"></script>
-    self.addEventListener('fetch', (event) => {
-  // This allows the app to be "installed"
-});
+    <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
 </body>
 </html>
