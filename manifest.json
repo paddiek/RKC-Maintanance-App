@@ -9,7 +9,7 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/RKC-MAINTANANCE-APP/",
   "display": "standalone",
   "background_color": "#12635B",
   "theme_color": "#12635B"
