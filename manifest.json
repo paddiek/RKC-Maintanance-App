@@ -3,13 +3,13 @@
   "name": "RKC Maintenance",
   "icons": [
     {
-      "src": "icon-512.png.",
-      "type": "image/png.",
+      "src": "icon-512.png",
+      "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"
     }
   ],
-  "start_url": "/RKC-MAINTANANCE-APP/",
+  "start_url": "/RKC-Maintanance-App/",
   "display": "standalone",
   "background_color": "#12635B",
   "theme_color": "#12635B"
