@@ -82,6 +82,12 @@ input[type="file"] {
 input[type="file"]:hover {
     background: #e6f0ff;
 }
+select#issueType {
+    background-color: #eef6ff; /*
+    Light blue background for the dropdown */
+    font-weight:bold;
+    color:#004a99;
+}
     
 
 button:hover { background: #1d4ed8; }
