@@ -88,6 +88,67 @@ select#issueType {
     font-weight:bold;
     color:#004a99;
 }
+/* 1. This stops the "mushed together" look by stacking boxes */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px; /* Adds space between questions */
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 14px;
+}
+
+/* 2. Styling the "Typing Boxes" to look modern */
+input, select, textarea {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ddd;
+    border-radius: 12px; /* Smooth rounded corners */
+    background-color: #f9f9f9;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box; /* Crucial for mobile scaling */
+}
+
+/* 3. The "Spicy Glow" when a student clicks to type */
+input:focus, select:focus, textarea:focus {
+    border-color: #004a99; /* Deep University Blue */
+    background-color: #ffffff;
+    box-shadow: 0 0 12px rgba(0, 74, 153, 0.2);
+    outline: none;
+}
+
+/* 4. Making the 'Take Photo' area look like a button */
+input[type="file"] {
+    background-color: #eef6ff;
+    border: 2px dashed #004a99;
+    padding: 20px;
+    cursor: pointer;
+}
+
+/* 5. The Submit Button */
+button[type="submit"] {
+    width: 100%;
+    background-color: #004a99;
+    color: white;
+    padding: 18px;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #002d5f;
+    transform: translateY(-2px);
+}
     
 
 button:hover { background: #1d4ed8; }
