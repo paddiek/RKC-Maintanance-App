@@ -155,6 +155,14 @@ input:focus, select:focus {
     from { transform: rotate(0deg) translate(0, 0); }
     to { transform: rotate(360deg) translate(20px, 20px); }
 }
+.container {
+    background: rgba(255, 255, 255, 0.95); /* Nearly solid white */
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1; /* Makes sure the form stays ON TOP of the RKC text */
+}
     
 
 button:hover { background: #1d4ed8; }
