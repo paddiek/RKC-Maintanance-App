@@ -72,6 +72,16 @@ input:focus, select: focus, textarea:focus {
     box-shadow: 0 0 8px rgba(0, 74, 153, 0.2); /* Soft blue glow */
     outline:none;
 }
+input[type="file"] {
+    background:#background:#f0f0f0;
+    border: 2px dashed #004a99;  /*
+    Dashed line suggests "drop here"  */
+    padding:20px;
+    cursor:pointer;
+}
+input[type="file"]:hover {
+    background: #e6f0ff;
+}
     
 
 button:hover { background: #1d4ed8; }
