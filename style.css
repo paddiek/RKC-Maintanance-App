@@ -122,6 +122,39 @@ input:focus, select:focus {
     outline: none;
     background-color: #ffffff;
 }
+/* Container to keep text behind the form */
+.floating-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background-color: #f4f7f6;
+}
+
+/* Styling the RKC text */
+.rkc-text {
+    position: absolute;
+    font-size: 8rem; /* Large size */
+    font-weight: 900;
+    color: rgba(0, 74, 153, 0.04); /* Very faint navy */
+    user-select: none;
+    pointer-events: none;
+    animation: rotateRKC 25s infinite linear;
+}
+
+/* Different positions for the text */
+.rkc-1 { top: 10%; left: 5%; animation-duration: 30s; }
+.rkc-2 { top: 50%; right: 10%; animation-duration: 20s; animation-direction: reverse; }
+.rkc-3 { bottom: 10%; left: 15%; animation-duration: 35s; }
+
+/* The Rotating Animation */
+@keyframes rotateRKC {
+    from { transform: rotate(0deg) translate(0, 0); }
+    to { transform: rotate(360deg) translate(20px, 20px); }
+}
     
 
 button:hover { background: #1d4ed8; }
