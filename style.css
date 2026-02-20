@@ -50,6 +50,29 @@ button {
     cursor: pointer;
     transition: background 0.2s;
 }
+/* Styling the input boxes */
+input,select, textarea {
+    width: 100%;
+    padding:12px;
+    margin-top: 5px;
+    border: 2px solid #add;  /*
+    Subtle grey border */
+    border-radius: 8px; /* Rounded corners */
+    transition: all 0.3s ease; /*
+    Smooth color change */
+    background-color:#f9f9f9; /*
+    Vey light grey background */
+}
+/* When the student clicks (focuses) on a box */
+input:focus, select: focus, textarea:focus {
+    border-color: #004a99; /*
+    Matches your blue theme */
+    background-color: #ffffff; /*
+    Turns white when typing */
+    box-shadow: 0 0 8px rgba(0, 74, 153, 0.2); /* Soft blue glow */
+    outline:none;
+}
+    
 
 button:hover { background: #1d4ed8; }
 
