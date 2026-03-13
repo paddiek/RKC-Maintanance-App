@@ -5,50 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maintenance Portal</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="theme-color" content="#12635B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body>
-
-    <div class="app-container">
+      <div class="app-container">
         <header>
-            <h1>Student Support</h1>
+            <h1> RKC Student Support</h1>
             <p>Report maintenance issues below</p>
         </header>
+<form action="https://formspree.io/f/xdaaykyr" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="studentName">Full Name</label>
+        <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
+    </div>
+     <div class="form-group">
+        <label for="location">Room Number</label>
+        <input type="text" id="location" name="location" placeholder="e.g. Room 204" required>
+    </div>
 
-        <form id="complaintForm" name="maintenance-v1" method="POST" data-netlify="true" enctype="multipart/form-data">
-            
+  <div class="form-group">
+    <label form="residence">Residence:</label>
+    <select name="residence" id="residence" required>
+        <option value="" disabled selected>Select Residence...</option> 
+      <option value="clark">Clark House</option>
+      <option value="norwich">Norwich</option>
+      <option value="nbs">NBS</option>
+      <option value="langham">Langham</option>
+    </select>
+  </div>
+        
+     
             <div class="form-group">
-                <label for="studentName">Full Name</label>
-                <input type="text" id="studentName" name="studentName" required>
-            </div>
+            <label for="phone">Phone Number </label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g. 081 234 5678" required>    
+              </div>
+   
 
-            <div class="form-group">
-                <label for="location">Room / Building</label>
-                <input type="text" id="location" name="location" placeholder="e.g. Room 204, Block B" required>
-            </div>
+    <div class="form-group">
+        <label for="issueType">Issue Category</label>
+        <select id="issueType" name="issueType" required>
+            <option value="">Select Category...</option>
+            <option value="Plumbing">Plumbing</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Furniture">Furniture/Fixing</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
 
-            <div class="form-group">
-                <label for="issueType">Issue Category</label>
-                <select id="issueType" name="issueType" required>
-                    <option value="">Select Category...</option>
-                    <option value="Plumbing">Plumbing</option>
-                    <option value="Electrical">Electrical</option>
-                    <option value="Furniture">Furniture/Fixing</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+                
+            <input type="hidden" name="_cc" value="moyomartin462@gmail.com,third-email@example.com"/>
+            <input type="hidden" name="_next" value="https://paddiek.github.io/RKC-Maintanance-App/success.html">
 
-            <div class="form-group">
-                <label for="details">Description</label>
-                <textarea id="details" name="details" rows="4" placeholder="What needs fixing?" required></textarea>
-            </div>
+    <div class="form-group">
+        <label for="details">Description</label>
+        <textarea id="details" name="details" rows="4" placeholder="What needs fixing?" required></textarea>
+    </div>
 
-            <div class="form-group">
-                <label for="photo">Upload a Photo</label>
-                <input type="file" id="photo" name="photo" accept="image/*">
-            </div>
-
-            <button type="submit" id="submitBtn">Submit Report</button>
-        </form>
+    <button type="submit" id="submitBtn">Submit Report</button>
+</form>
 
         <div id="successMessage" class="hidden">
             <div class="icon">✅</div>
@@ -59,5 +78,10 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
 </body>
 </html>

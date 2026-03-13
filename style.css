@@ -50,6 +50,80 @@ button {
     cursor: pointer;
     transition: background 0.2s;
 }
+/* Styling the input boxes */
+input,select, textarea {
+    width: 100%;
+    padding:12px;
+    margin-top: 5px;
+    border: 2px solid #add;  /*
+    Subtle grey border */
+    border-radius: 8px; /* Rounded corners */
+    transition: all 0.3s ease; /*
+    Smooth color change */
+    background-color:#f9f9f9; /*
+    Vey light grey background */
+}
+/* When the student clicks (focuses) on a box */
+input:focus, select: focus, textarea:focus {
+    border-color: #004a99; /*
+    Matches your blue theme */
+    background-color: #ffffff; /*
+    Turns white when typing */
+    box-shadow: 0 0 8px rgba(0, 74, 153, 0.2); /* Soft blue glow */
+    outline:none;
+}
+input[type="file"] {
+    background:#background:#f0f0f0;
+    border: 2px dashed #004a99;  /*
+    Dashed line suggests "drop here"  */
+    padding:20px;
+    cursor:pointer;
+}
+input[type="file"]:hover {
+    background: #e6f0ff;
+}
+select#issueType {
+    background-color: #eef6ff; /*
+    Light blue background for the dropdown */
+    font-weight:bold;
+    color:#004a99;
+}
+/* This forces each question to sit on its own line */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #004a99; /* Professional Navy */
+    text-align: left;
+}
+
+/* Spicy Glowing Typing Boxes */
+input, select, textarea {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    background-color: #fdfdfd;
+    font-size: 16px;
+    box-sizing: border-box; /* Prevents boxes from going off-screen */
+    transition: 0.3s ease;
+}
+
+/* The Glow when a student clicks to type */
+input:focus, select:focus {
+    border-color: #004a99;
+    box-shadow: 0 0 12px rgba(0, 74, 153, 0.2);
+    outline: none;
+    background-color: #ffffff;
+}
+
+    
 
 button:hover { background: #1d4ed8; }
 
