@@ -6,119 +6,128 @@
     <title>Maintenance Portal</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="icon-512.png">
-<link rel="apple-touch-icon" href="icon-512.png">
-<meta name="theme-color" content="#12635B">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="icon" type="image/png" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-512.png">
+    <meta name="theme-color" content="#12635B">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
 </head>
 <body>
-      <div class="app-container">
+    <div class="app-container">
         <header>
             <h1> RKC Student Support</h1>
             <p>Report maintenance issues below</p>
         </header>
-<form action="https://formspree.io/f/xdaaykyr" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="studentName">Full Name</label>
-        <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
-    </div>
-     <div class="form-group">
-        <label for="location">Room Number</label>
-        <input type="text" id="location" name="location" placeholder="e.g. Room 204" required>
-    </div>
 
-  <div class="form-group">
-    <label form="residence">Residence:</label>
-    <select name="residence" id="residence" required>
-        <option value="" disabled selected>Select Residence...</option> 
-      <option value="clark">Clark House</option>
-      <option value="norwich">Norwich</option>
-      <option value="nbs">NBS</option>
-      <option value="langham">Langham</option>
-    </select>
-  </div>
-        
-     
+        <!-- ADDED id="rkcForm" HERE -->
+        <form id="rkcForm" action="https://formspree.io/f/xdaaykyr" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-            <label for="phone">Phone Number </label>
-            <input type="tel" id="phone" name="phone" placeholder="e.g. 081 234 5678" required>    
-              </div>
-   
+                <label for="studentName">Full Name</label>
+                <!-- FIXED ID to studentName -->
+                <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Room Number</label>
+                <!-- FIXED ID to location -->
+                <input type="text" id="location" name="location" placeholder="e.g. Room 204" required>
+            </div>
 
-    <div class="form-group">
-        <label for="issueType">Issue Category</label>
-        <select id="issueType" name="issueType" required>
-            <option value="">Select Category...</option>
-            <option value="Plumbing">Plumbing</option>
-            <option value="Electrical">Electrical</option>
-            <option value="Furniture">Furniture/Fixing</option>
-            <option value="Other">Other</option>
-        </select>
-    </div>
+            <div class="form-group">
+                <label for="residence">Residence:</label>
+                <select name="residence" id="residence" required>
+                    <option value="" disabled selected>Select Residence...</option> 
+                    <option value="clark">Clark House</option>
+                    <option value="norwich">Norwich</option>
+                    <option value="nbs">NBS</option>
+                    <option value="langham">Langham</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number </label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 081 234 5678" required>    
+            </div>
 
+            <div class="form-group">
+                <label for="issueType">Issue Category</label>
+                <select id="issueType" name="issueType" required>
+                    <option value="">Select Category...</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Furniture">Furniture/Fixing</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
                 
-            <input type="hidden" name="_cc" value="moyomartin462@gmail.com,third-email@example.com"/>
+            <input type="hidden" name="_cc" value="moyomartin462@gmail.com"/>
             <input type="hidden" name="_next" value="https://paddiek.github.io/RKC-Maintanance-App/success.html">
 
-    <div class="form-group">
-        <label for="details">Description</label>
-        <textarea id="details" name="details" rows="4" placeholder="What needs fixing?" required></textarea>
-    </div>
+            <div class="form-group">
+                <label for="details">Description</label>
+                <textarea id="details" name="details" rows="4" placeholder="What needs fixing?" required></textarea>
+            </div>
 
-    <button type="submit" id="submitBtn">Submit Report</button>
-</form>
+            <button type="submit" id="submitBtn">Submit Report</button>
+        </form>
 
         <div id="successMessage" class="hidden">
             <div class="icon">✅</div>
             <h2>Report Received</h2>
-            <p>Maintenance has been notified. Your Ref ID: <span id="refId"></span></p>
+            <p>Maintenance has been notified.</p>
             <button onclick="location.reload()">Send Another</button>
         </div>
     </div>
+
 <script>
-  const form = document.getElementById('rkcForm');
-  
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault(); 
+  // Ensure the DOM is loaded before running the script
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('rkcForm');
     
-    const btn = document.getElementById('submitBtn');
-    const originalText = btn.innerText;
-    btn.innerText = "Sending..."; 
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+        
+        const btn = document.getElementById('submitBtn');
+        const originalText = btn.innerText;
+        btn.innerText = "Sending..."; 
 
-    // 1. Get values from the form
-    const name = document.getElementById('fullName').value;
-    const room = document.getElementById('roomNumber').value;
-    const res = document.getElementById('residence').value;
-    const desc = document.getElementById('description').value;
-    const whatsappNum = "27620195994"; // Replace with your WhatsApp number
+        // 1. Get values using the CORRECT IDs from your HTML above
+        const name = document.getElementById('studentName').value; 
+        const room = document.getElementById('location').value;
+        const res = document.getElementById('residence').value;
+        const category = document.getElementById('issueType').value;
+        const desc = document.getElementById('details').value;
+        const whatsappNum = "27620195994"; 
 
-    // 2. Submit to Formspree
-    const formData = new FormData(form);
-    try {
-      await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+        // 2. Submit to Formspree
+        const formData = new FormData(form);
+        try {
+          await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          // 3. Open WhatsApp with formatted message
+          const message = `*RKC MAINTENANCE REPORT*%0A` +
+                          `*From:* ${name}%0A` +
+                          `*Room:* ${room}%0A` +
+                          `*Res:* ${res}%0A` +
+                          `*Category:* ${category}%0A` +
+                          `*Issue:* ${desc}`;
+
+          window.location.href = `https://wa.me/${whatsappNum}?text=${message}`;
+          
+        } catch (error) {
+          alert("Submission failed. Check your connection.");
+          btn.innerText = originalText;
+        }
       });
-
-      // 3. Open WhatsApp with formatted message
-      const message = `*RKC MAINTENANCE REPORT*%0A` +
-                      `*From:* ${name}%0A` +
-                      `*Room:* ${room}%0A` +
-                      `*Res:* ${res}%0A` +
-                      `*Issue:* ${desc}`;
-
-      window.location.href = `https://wa.me/${whatsappNum}?text=${message}`;
-      
-    } catch (error) {
-      alert("Submission failed. Check your connection.");
-      btn.innerText = originalText;
     }
   });
 </script>
-    <script src="script.js"></script>
-    <script>
+
+<script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
