@@ -97,7 +97,21 @@
         const res = document.getElementById('residence').value;
         const category = document.getElementById('issueType').value;
         const desc = document.getElementById('details').value;
-        const whatsappNum = "27620195994"; 
+       // 1.5 Determine which WhatsApp number to use based on Residence
+        let whatsappNum;
+        const selectedRes = document.getElementById('residence').value;
+
+        if (selectedRes === "clark") {
+            whatsappNum = "27620195994"; // Manager for Clark House
+        } else if (selectedRes === "norwich") {
+            whatsappNum = "27691704288"; // Change this to Norwich Manager's number
+        } else if (selectedRes === "nbs") {
+            whatsappNum = "27620195994"; // Change this to NBS Manager's number
+        } else if (selectedRes === "langham") {
+            whatsappNum = "27691704288"; // Change this to Langham Manager's number
+        } else {
+            whatsappNum = "27620195994"; // Default backup number
+        } 
 
         // 2. Submit to Formspree
         const formData = new FormData(form);
