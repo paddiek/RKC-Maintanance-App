@@ -158,21 +158,29 @@ body::before, body::after {
     left: 0;
     right: 0;
     bottom: 0;
+    body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: 
-        radial-gradient(circle, #fff 4px, transparent 4px), /* Increased from 2px to 4px */
-        radial-gradient(circle, #fff 3px, transparent 3px); /* Increased from 1.5px to 3px */
-    background-size: 250px 250px, 400px 400px; /* Spread them out a bit more for the bigger size */
+        radial-gradient(circle, #fff 6px, transparent 6px), 
+        radial-gradient(circle, #fff 4px, transparent 4px);
+    background-size: 250px 250px, 400px 400px;
     background-position: 0 0, 60px 100px;
-    animation: snowFall 8s linear infinite; /* Slightly faster fall for "heavier" flakes */
-    opacity: 0.5; /* Made them clearer (0.5 instead of 0.3) */
+    animation: snowFall 10s linear infinite;
+    opacity: 0.6;
     pointer-events: none;
-    z-index: 1; /* Keeps them behind the form */
+    z-index: 1;
 }
 
 body::after {
     background-size: 350px 350px, 500px 500px;
-    animation-duration: 12s; /* Second layer moves at a different speed for depth */
-    opacity: 0.3;
+    animation-duration: 15s;
+    opacity: 0.4;
+    z-index: 1;
 }
     .app-container {
     background: rgba(255, 255, 255, 0.95); 
