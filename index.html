@@ -66,7 +66,10 @@
                 <label for="details">Description</label>
                 <textarea id="details" name="details" rows="4" placeholder="What needs fixing?" required></textarea>
             </div>
-
+            <div class="form-group">
+    <label for="attachment">Upload Photo of the Issue</label>
+    <input type="file" id="attachment" name="upload" accept="image/*" capture="environment">
+</div>
             <button type="submit" id="submitBtn">Submit Report</button>
         </form>
 
@@ -124,11 +127,14 @@
 
           // 3. Open WhatsApp with formatted message
           const message = `*RKC MAINTENANCE REPORT*%0A` +
-                          `*From:* ${name}%0A` +
-                          `*Room:* ${room}%0A` +
-                          `*Res:* ${res}%0A` +
-                          `*Category:* ${category}%0A` +
-                          `*Issue:* ${desc}`;
+                          `// 3. Open WhatsApp with formatted message
+const message = `*RKC MAINTENANCE REPORT*%0A` +
+                `*From:* ${name}%0A` +
+                `*Room:* ${room}%0A` +
+                `*Res:* ${res}%0A` +
+                `*Category:* ${category}%0A` +
+                `*Issue:* ${desc}%0A%0A` +
+                `_Note: Please attach the photo you took to this chat._`;
 
           window.location.href = `https://wa.me/${whatsappNum}?text=${message}`;
           
