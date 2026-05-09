@@ -134,6 +134,56 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* RKC Teal Gradient */
+    background: linear-gradient(-45deg, #12635B, #1e857a, #0d4d46, #24a194);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Keeps snow inside the screen */
+    position: relative;
+}
+
+/* Creating the Snow Layers */
+body::before, body::after {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle, #fff 2px, transparent 2px),
+        radial-gradient(circle, #fff 1.5px, transparent 1.5px);
+    background-size: 200px 200px, 350px 350px;
+    background-position: 0 0, 40px 60px;
+    animation: snowFall 10s linear infinite;
+    opacity: 0.3; /* Makes snow subtle so it doesn't distract */
+    pointer-events: none; /* Allows clicking through the snow */
+}
+
+body::after {
+    background-size: 300px 300px, 450px 450px;
+    animation-duration: 15s;
+    opacity: 0.2;
+}
+
+@keyframes snowFall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
     /* This creates a large gradient that we will move */
     background: linear-gradient(-45deg, #12635B, #1e857a, #0d4d46, #24a194);
     background-size: 400% 400%;
@@ -168,4 +218,16 @@ header h1 {
     border: 1px solid rgba(255, 255, 255, 0.18);
     width: 90%;
     max-width: 450px;
+}
+
+header h1 {
+    color: #12635B;
+    animation: floatStrong 4s ease-in-out infinite;
+    display: inline-block; /* Required for transform to work well */
+}
+
+@keyframes floatStrong {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); } /* Moved from 5px to 15px */
+    100% { transform: translateY(0px) rotate(0deg); }
 }
