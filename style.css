@@ -229,7 +229,10 @@ body::after {
     100% { background-position: 0% 50%; }
 }
 header h1 {
-    animation: float 3s ease-in-out infinite;
+    color: #12635B;
+    display: inline-block;
+    /* This line triggers the movement */
+    animation: floatStrong 4s ease-in-out infinite; 
 }
 
 @keyframes float {
