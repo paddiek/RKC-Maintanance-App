@@ -150,7 +150,7 @@ body {
     position: relative;
 }
 
-/* Creating the Snow Layers */
+/* Creating the Bigger Snow Layers */
 body::before, body::after {
     content: "";
     position: absolute;
@@ -159,19 +159,31 @@ body::before, body::after {
     right: 0;
     bottom: 0;
     background-image: 
-        radial-gradient(circle, #fff 2px, transparent 2px),
-        radial-gradient(circle, #fff 1.5px, transparent 1.5px);
-    background-size: 200px 200px, 350px 350px;
-    background-position: 0 0, 40px 60px;
-    animation: snowFall 10s linear infinite;
-    opacity: 0.3; /* Makes snow subtle so it doesn't distract */
-    pointer-events: none; /* Allows clicking through the snow */
+        radial-gradient(circle, #fff 4px, transparent 4px), /* Increased from 2px to 4px */
+        radial-gradient(circle, #fff 3px, transparent 3px); /* Increased from 1.5px to 3px */
+    background-size: 250px 250px, 400px 400px; /* Spread them out a bit more for the bigger size */
+    background-position: 0 0, 60px 100px;
+    animation: snowFall 8s linear infinite; /* Slightly faster fall for "heavier" flakes */
+    opacity: 0.5; /* Made them clearer (0.5 instead of 0.3) */
+    pointer-events: none;
+    z-index: 1; /* Keeps them behind the form */
 }
 
 body::after {
-    background-size: 300px 300px, 450px 450px;
-    animation-duration: 15s;
-    opacity: 0.2;
+    background-size: 350px 350px, 500px 500px;
+    animation-duration: 12s; /* Second layer moves at a different speed for depth */
+    opacity: 0.3;
+}
+    .app-container {
+    background: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    position: relative; /* THIS IS REQUIRED FOR Z-INDEX TO WORK */
+    z-index: 10;        /* THIS KEEPS THE FORM IN FRONT OF THE SNOW */
+    width: 90%;
+    max-width: 450px;
 }
 
 @keyframes snowFall {
