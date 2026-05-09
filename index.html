@@ -19,16 +19,13 @@
             <p>Report maintenance issues below</p>
         </header>
 
-        <!-- ADDED id="rkcForm" HERE -->
-        <form id="rkcForm" action="https://formspree.io/f/xdaaykyr" method="POST" enctype="multipart/form-data">
+        <form id="rkcForm" action="https://formspree.io/f/xdaaykyr" method="POST">
             <div class="form-group">
                 <label for="studentName">Full Name</label>
-                <!-- FIXED ID to studentName -->
                 <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" required>
             </div>
             <div class="form-group">
                 <label for="location">Room Number</label>
-                <!-- FIXED ID to location -->
                 <input type="text" id="location" name="location" placeholder="e.g. Room 204" required>
             </div>
 
@@ -59,15 +56,14 @@
                 </select>
             </div>
                 
+            <!-- REMOVED _next to prevent the Formspree "Thanks" page from blocking WhatsApp -->
             <input type="hidden" name="_cc" value="moyomartin462@gmail.com"/>
-            <input type="hidden" name="_next" value="https://paddiek.github.io/RKC-Maintanance-App/success.html">
 
             <div class="form-group">
                 <label for="details">Description</label>
                 <textarea id="details" name="details" rows="4" placeholder="What needs fixing?" required></textarea>
             </div>
-            <div class="form-group">
-    
+
             <button type="submit" id="submitBtn">Submit Report</button>
         </form>
 
@@ -80,7 +76,6 @@
     </div>
 
 <script>
-  // Ensure the DOM is loaded before running the script
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('rkcForm');
     
@@ -92,49 +87,45 @@
         const originalText = btn.innerText;
         btn.innerText = "Sending..."; 
 
-        // 1. Get values using the CORRECT IDs from your HTML above
         const name = document.getElementById('studentName').value; 
         const room = document.getElementById('location').value;
         const res = document.getElementById('residence').value;
         const category = document.getElementById('issueType').value;
         const desc = document.getElementById('details').value;
-       // 1.5 Determine which WhatsApp number to use based on Residence
-        let whatsappNum;
-        const selectedRes = document.getElementById('residence').value;
 
-        if (selectedRes === "clark") {
-            whatsappNum = "27683789094"; // Manager for Clark House
-        } else if (selectedRes === "norwich") {
-            whatsappNum = "27691704288"; // Change this to Norwich Manager's number
-        } else if (selectedRes === "nbs") {
-            whatsappNum = "27620195994"; // Change this to NBS Manager's number
-        } else if (selectedRes === "langham") {
-            whatsappNum = "27691704288"; // Change this to Langham Manager's number
+        let whatsappNum;
+        if (res === "clark") {
+            whatsappNum = "27683789094"; 
+        } else if (res === "norwich") {
+            whatsappNum = "27691704288"; 
+        } else if (res === "nbs") {
+            whatsappNum = "27620195994"; 
+        } else if (res === "langham") {
+            whatsappNum = "27691704288"; 
         } else {
-            whatsappNum = "27620195994"; // Default backup number
+            whatsappNum = "27620195994"; 
         } 
 
-        // 2. Submit to Formspree
         const formData = new FormData(form);
         try {
+          // Send to Formspree in the background
           await fetch(form.action, {
             method: 'POST',
             body: formData,
             headers: { 'Accept': 'application/json' }
           });
 
-          // 3. Open WhatsApp with formatted message
+          // Create the WhatsApp message with instructions
           const message = `*RKC MAINTENANCE REPORT*%0A` +
-                          `// 3. Open WhatsApp with Student Instructions
-      const message = `*RKC MAINTENANCE REPORT*%0A` +
-                      `*From:* ${name}%0A` +
-                      `*Room:* ${room}%0A` +
-                      `*Res:* ${res}%0A` +
-                      `*Issue:* ${desc}%0A%0A` +
-                      `*--- NEXT STEP FOR STUDENT ---*%0A` +
-                      `Please click the 📎 (attachment) or 📷 (camera) icon below to *send a photo* of the issue now.`;
+                          `*From:* ${name}%0A` +
+                          `*Room:* ${room}%0A` +
+                          `*Res:* ${res}%0A` +
+                          `*Issue:* ${desc}%0A%0A` +
+                          `*--- NEXT STEP ---*%0A` +
+                          `Please click the 📎 or 📷 icon to *send a photo* of the issue now.`;
 
-      window.location.href = `https://wa.me/${whatsappNum}?text=${message}`;
+          // Redirect to WhatsApp
+          window.location.href = `https://wa.me/${whatsappNum}?text=${message}`;
           
         } catch (error) {
           alert("Submission failed. Check your connection.");
