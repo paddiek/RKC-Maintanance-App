@@ -112,45 +112,43 @@
         } 
          111:     }
 
-    const whatsappMessage = `🚨 *NEW MAINTENANCE TICKET* 🚨\n` +
-                             `🎫 *Ticket ID:* ${ticketID}\n\n` +
-                             `👤 *Name:* ${name}\n` +
-                             `🏢 *Residence:* ${res}\n` +
-                             `🚪 *Room:* ${room}\n` +
-                             `📝 *Issue:* ${desc}`;
-  // Append ticket ID to Formspree email data
-            const formData = new FormData(form);
-            formData.append('Ticket_ID', ticketID);
+   // 1. Build WhatsApp message text
+        const whatsappMessage = `🚨 *NEW MAINTENANCE TICKET* 🚨\n\n` +
+                                `🎫 *Ticket ID:* ${ticketID}\n` +
+                                `👤 *Name:* ${name}\n` +
+                                `🏢 *Residence:* ${res}\n` +
+                                `🚪 *Room:* ${room}\n` +
+                                `📝 *Issue:* ${desc}\n\n` +
+                                `Please click the 📎 icon to send a photo if needed.`;
 
-            try {
-                // Send to Formspree in the background
-                await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
+        // 2. Append Ticket ID to Formspree
+        const formData = new FormData(form);
+        formData.append('Ticket_ID', ticketID);
 
-                // Display Ticket ID and show success message on screen
-                document.getElementById('ticketIdDisplay').innerText = ticketID;
-                document.getElementById('rkcForm').classList.add('hidden');
-                document.getElementById('successMessage').classList.remove('hidden');
+        try {
+            // Send to Formspree in background
+            await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            });
 
-                // Create the WhatsApp message with Ticket ID
-                const message = `*RKC MAINTENANCE REPORT*%0A` +
-                                `*Ticket ID:* ${ticketID}%0A%0A` +
-                                `*From:* ${name}%0A` +
-                                `*Room:* ${room}%0A` +
-                                `*Res:* ${res}%0A` +
-                                `*Issue:* ${desc}%0A%0A` +
-                                `*--- NEXT STEP ---*%0A` +
-                                `Please click the 📎 or 📷 icon to *send a photo* of the issue now.`;
+            // Update UI on screen (Ensure <strong id="ticketIdDisplay"> exists in HTML!)
+            const ticketDisplay = document.getElementById('ticketIdDisplay');
+            if (ticketDisplay) {
+                ticketDisplay.innerText = ticketID;
+            }
 
-                // Redirect to WhatsApp
-                window.location.href = `https://wa.me/${whatsappNum}?text=${message}`;
-          
+            document.getElementById('rkcForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+
+            // 3. Redirect to WhatsApp (using whatsappMessage & encodeURIComponent)
+            const waUrl = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.location.href = waUrl;
+
         } catch (error) {
-          alert("Submission failed. Check your connection.");
-          btn.innerText = originalText;
+            alert("Submission failed. Check your connection.");
+            btn.innerText = originalText;
         }
       });
     }
