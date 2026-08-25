@@ -77,6 +77,18 @@
             <p>Maintenance has been notified.Redirecting to Whatsapp</p>
             <button onclick="location.reload()">Send Another</button>
         </div>
+        -- ⬇️ PLACE THE TRACKING CARD RIGHT HERE ⬇️ -->
+        <hr style="margin: 25px 0; border: none; border-top: 1px solid #e0e0e0;">
+
+        <div class="status-card" style="background: #f8f9fa; padding: 15px; border-radius: 8px; text-align: center;">
+            <h3 style="margin-top: 0; color: #12635B;">Track Existing Ticket</h3>
+            <p style="font-size: 0.9rem; color: #555;">Already logged an issue? Check status with your manager.</p>
+            
+            <div style="display: flex; gap: 8px; justify-content: center; margin-top: 10px;">
+                <input type="text" id="trackTicketId" placeholder="e.g. #RKC-5631" style="padding: 8px; border: 1px solid #ccc; border-radius: 5px; width: 60%;">
+                <button type="button" id="trackBtn" style="padding: 8px 15px; background: #12635B; color: white; border: none; border-radius: 5px; cursor: pointer;">Track</button>
+            </div>
+        </div>
     </div>
 
 <script>
@@ -151,6 +163,27 @@
             btn.innerText = originalText;
         }
       });
+        // ⬇️ PASTE RIGHT HERE (Inside DOMContentLoaded, after submit listener) ⬇️
+      const trackBtn = document.getElementById('trackBtn');
+      if (trackBtn) {
+          trackBtn.addEventListener('click', function() {
+              const trackId = document.getElementById('trackTicketId').value.trim();
+              const selectedRes = document.getElementById('residence').value;
+
+              if (!trackId) {
+                  alert("Please enter your Ticket ID (e.g. #RKC-5631)");
+                  return;
+              }
+
+              let managerPhone = "27620195994";
+              if (selectedRes === "clark" || selectedRes === "norwich") managerPhone = "27838463813";
+              if (selectedRes === "nbs") managerPhone = "27698940775";
+              if (selectedRes === "langham") managerPhone = "27605774617";
+
+              const followUpMessage = `Hi! I am following up on the status of my maintenance ticket *${trackId}*. Could you please provide an update?`;
+              window.location.href = `https://wa.me/${managerPhone}?text=${encodeURIComponent(followUpMessage)}`;
+          });
+      }
     }
   });
 </script>
